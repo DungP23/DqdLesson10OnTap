@@ -1,0 +1,82 @@
+﻿@model DqdLesson10.Models.SinhVien
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SinhVien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoSv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoSv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiSinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiSinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HocBong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HocBong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiemTb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiemTb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Khoa.TenKhoa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Khoa.TenKhoa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaSv }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

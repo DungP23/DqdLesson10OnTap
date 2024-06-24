@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DqdQlSvModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="KetQua">
+          <Key>
+            <PropertyRef Name="MaSv" />
+            <PropertyRef Name="MaMh" />
+          </Key>
+          <Property Name="MaSv" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="MaMh" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Diem" Type="int" />
+        </EntityType>
+        <EntityType Name="Khoa">
+          <Key>
+            <PropertyRef Name="MaKh" />
+          </Key>
+          <Property Name="MaKh" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TenKhoa" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MonHoc">
+          <Key>
+            <PropertyRef Name="MaMh" />
+          </Key>
+          <Property Name="MaMh" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TenMh" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoTiet" Type="int" />
+        </EntityType>
+        <EntityType Name="SinhVien">
+          <Key>
+            <PropertyRef Name="MaSv" />
+          </Key>
+          <Property Name="MaSv" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="HoSv" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenSv" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phai" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="NoiSinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaKh" Type="char" MaxLength="10" />
+          <Property Name="HocBong" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiemTb" Type="char" MaxLength="10" />
+        </EntityType>
+        <Association Name="fk_MaKh">
+          <End Role="Khoa" Type="Self.Khoa" Multiplicity="0..1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoa">
+              <PropertyRef Name="MaKh" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="MaKh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_MaMh">
+          <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="1" />
+          <End Role="KetQua" Type="Self.KetQua" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonHoc">
+              <PropertyRef Name="MaMh" />
+            </Principal>
+            <Dependent Role="KetQua">
+              <PropertyRef Name="MaMh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_MaSv">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+          <End Role="KetQua" Type="Self.KetQua" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="MaSv" />
+            </Principal>
+            <Dependent Role="KetQua">
+              <PropertyRef Name="MaSv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DqdQlSvModelStoreContainer">
+          <EntitySet Name="KetQua" EntityType="Self.KetQua" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Khoa" EntityType="Self.Khoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonHoc" EntityType="Self.MonHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_MaKh" Association="Self.fk_MaKh">
+            <End Role="Khoa" EntitySet="Khoa" />
+            <End Role="SinhVien" EntitySet="SinhVien" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MaMh" Association="Self.fk_MaMh">
+            <End Role="MonHoc" EntitySet="MonHoc" />
+            <End Role="KetQua" EntitySet="KetQua" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MaSv" Association="Self.fk_MaSv">
+            <End Role="SinhVien" EntitySet="SinhVien" />
+            <End Role="KetQua" EntitySet="KetQua" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DqdQlSvModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="KetQua">
+          <Key>
+            <PropertyRef Name="MaSv" />
+            <PropertyRef Name="MaMh" />
+          </Key>
+          <Property Name="MaSv" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MaMh" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Diem" Type="Int32" />
+          <NavigationProperty Name="MonHoc" Relationship="Self.fk_MaMh" FromRole="KetQua" ToRole="MonHoc" />
+          <NavigationProperty Name="SinhVien" Relationship="Self.fk_MaSv" FromRole="KetQua" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="Khoa">
+          <Key>
+            <PropertyRef Name="MaKh" />
+          </Key>
+          <Property Name="MaKh" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TenKhoa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SinhVien" Relationship="Self.fk_MaKh" FromRole="Khoa" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="MonHoc">
+          <Key>
+            <PropertyRef Name="MaMh" />
+          </Key>
+          <Property Name="MaMh" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TenMh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoTiet" Type="Int32" />
+          <NavigationProperty Name="KetQua" Relationship="Self.fk_MaMh" FromRole="MonHoc" ToRole="KetQua" />
+        </EntityType>
+        <EntityType Name="SinhVien">
+          <Key>
+            <PropertyRef Name="MaSv" />
+          </Key>
+          <Property Name="MaSv" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="HoSv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenSv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="NoiSinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaKh" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="HocBong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiemTb" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="KetQua" Relationship="Self.fk_MaSv" FromRole="SinhVien" ToRole="KetQua" />
+          <NavigationProperty Name="Khoa" Relationship="Self.fk_MaKh" FromRole="SinhVien" ToRole="Khoa" />
+        </EntityType>
+        <Association Name="fk_MaMh">
+          <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="1" />
+          <End Role="KetQua" Type="Self.KetQua" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonHoc">
+              <PropertyRef Name="MaMh" />
+            </Principal>
+            <Dependent Role="KetQua">
+              <PropertyRef Name="MaMh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_MaSv">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+          <End Role="KetQua" Type="Self.KetQua" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="MaSv" />
+            </Principal>
+            <Dependent Role="KetQua">
+              <PropertyRef Name="MaSv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_MaKh">
+          <End Role="Khoa" Type="Self.Khoa" Multiplicity="0..1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoa">
+              <PropertyRef Name="MaKh" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="MaKh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DqdQlSvEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KetQua" EntityType="Self.KetQua" />
+          <EntitySet Name="Khoa" EntityType="Self.Khoa" />
+          <EntitySet Name="MonHoc" EntityType="Self.MonHoc" />
+          <EntitySet Name="SinhVien" EntityType="Self.SinhVien" />
+          <AssociationSet Name="fk_MaMh" Association="Self.fk_MaMh">
+            <End Role="MonHoc" EntitySet="MonHoc" />
+            <End Role="KetQua" EntitySet="KetQua" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MaSv" Association="Self.fk_MaSv">
+            <End Role="SinhVien" EntitySet="SinhVien" />
+            <End Role="KetQua" EntitySet="KetQua" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MaKh" Association="Self.fk_MaKh">
+            <End Role="Khoa" EntitySet="Khoa" />
+            <End Role="SinhVien" EntitySet="SinhVien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DqdQlSvModelStoreContainer" CdmEntityContainer="DqdQlSvEntities1">
+          <EntitySetMapping Name="KetQua">
+            <EntityTypeMapping TypeName="DqdQlSvModel.KetQua">
+              <MappingFragment StoreEntitySet="KetQua">
+                <ScalarProperty Name="MaSv" ColumnName="MaSv" />
+                <ScalarProperty Name="MaMh" ColumnName="MaMh" />
+                <ScalarProperty Name="Diem" ColumnName="Diem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Khoa">
+            <EntityTypeMapping TypeName="DqdQlSvModel.Khoa">
+              <MappingFragment StoreEntitySet="Khoa">
+                <ScalarProperty Name="MaKh" ColumnName="MaKh" />
+                <ScalarProperty Name="TenKhoa" ColumnName="TenKhoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonHoc">
+            <EntityTypeMapping TypeName="DqdQlSvModel.MonHoc">
+              <MappingFragment StoreEntitySet="MonHoc">
+                <ScalarProperty Name="MaMh" ColumnName="MaMh" />
+                <ScalarProperty Name="TenMh" ColumnName="TenMh" />
+                <ScalarProperty Name="SoTiet" ColumnName="SoTiet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SinhVien">
+            <EntityTypeMapping TypeName="DqdQlSvModel.SinhVien">
+              <MappingFragment StoreEntitySet="SinhVien">
+                <ScalarProperty Name="MaSv" ColumnName="MaSv" />
+                <ScalarProperty Name="HoSv" ColumnName="HoSv" />
+                <ScalarProperty Name="TenSv" ColumnName="TenSv" />
+                <ScalarProperty Name="Phai" ColumnName="Phai" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="NoiSinh" ColumnName="NoiSinh" />
+                <ScalarProperty Name="MaKh" ColumnName="MaKh" />
+                <ScalarProperty Name="HocBong" ColumnName="HocBong" />
+                <ScalarProperty Name="DiemTb" ColumnName="DiemTb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

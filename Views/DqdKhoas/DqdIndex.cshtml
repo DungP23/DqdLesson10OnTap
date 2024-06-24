@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DqdLesson10.Models.Khoa>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenKhoa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenKhoa)
+        </td>
+        <td>
+            @Html.ActionLink("DqdEdit", "DqdEdit", new { id=item.MaKh.Trim() }) |
+            @Html.ActionLink("DqdDetails","DqdDetails", new { id=item.MaKh.Trim() }) |
+            @Html.ActionLink("DqdDelete", "DqdDelete", new { id=item.MaKh.Trim() })
+        </td>
+    </tr>
+}
+
+</table>

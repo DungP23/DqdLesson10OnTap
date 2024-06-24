@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DqdLesson10.Models.MonHoc>
+
+@{
+    ViewBag.Title = "DqdIndex";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenMh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoTiet)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenMh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoTiet)
+        </td>
+        <td>
+            @Html.ActionLink("DqdEdit", "DqdEdit", new { id=item.MaMh.Trim() }) |
+            @Html.ActionLink("DqdDetails", "DqdDetails", new { id=item.MaMh.Trim() }) |
+            @Html.ActionLink("DqdDelete", "DqdDelete", new { id=item.MaMh.Trim() })
+        </td>
+    </tr>
+}
+
+</table>

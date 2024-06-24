@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DqdLesson10.Models.SinhVien>
+
+@{
+    ViewBag.Title = "DqdIndex";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HoSv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiSinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HocBong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiemTb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Khoa.TenKhoa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoSv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenSv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaySinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiSinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HocBong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiemTb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Khoa.TenKhoa)
+        </td>
+        <td>
+            @Html.ActionLink("DqdEdit", "DqdEdit", new { id=item.MaSv.Trim() }) |
+            @Html.ActionLink("DqdDetails", "DqdDetails", new { id=item.MaSv.Trim() }) |
+            @Html.ActionLink("DqdDelete", "DqdDelete", new { id=item.MaSv.Trim() })
+        </td>
+    </tr>
+}
+
+</table>
